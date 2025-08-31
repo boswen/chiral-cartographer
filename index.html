@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Chiral Cartographer — Coming Soon</title>
+  <meta name="description" content="Stick, Rope, Rail, & Road — a fan-made atlas for Death Stranding 2 builders.">
+  <meta property="og:title" content="The Chiral Cartographer — Coming Soon" />
+  <meta property="og:description" content="Forge your paths, plan your runs, and connect the world — one strand at a time." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chiralcartographer.com/" />
+  <meta property="og:image" content="https://chiralcartographer.com/res/og-image.png" />
+  <link rel="icon" href="res/favicon.ico" />
+  <!-- Tailwind CDN (for a quick teaser page) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Fallback if Tailwind is blocked: minimal sensible defaults */
+    body{background:#0a0a0a;color:#f3f3f3;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;}
+    .container{max-width:1100px;margin:0 auto;padding:2rem;}
+    .card{background:rgba(255,255,255,0.04);border-radius:1.25rem;padding:1.25rem;border:1px solid rgba(255,255,255,0.06);}
+    .pill{display:inline-block;border:1px solid rgba(255,255,255,0.18);border-radius:9999px;padding:.35rem .75rem;font-size:.8rem;margin:.25rem .25rem 0 0;}
+    .btn{background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);padding:.75rem 1rem;border-radius:.75rem;color:#fff;text-decoration:none;display:inline-block;}
+    .btn:hover{background:rgba(255,255,255,0.15);}
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+  <main class="container">
+    <header class="flex items-center justify-between gap-4 mb-10">
+      <div class="flex items-center gap-4">
+        <div id="logo-fallback" style="display:none">
+          <div class="text-xl font-bold">The Chiral Cartographer</div>
+          <div class="text-sm opacity-70">Stick, Rope, Rail, &amp; Road</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">The Chiral Cartographer</h1>
+        <p class="mt-2 text-lg md:text-xl opacity-90">Stick, Rope, Rail, &amp; Road</p>
+        <p class="mt-5 text-neutral-300">Forge your paths, plan your runs, and connect the world — one strand at a time.</p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <span class="pill">Plan structures!</span>
+          <span class="pill">Tally resources!</span>
+          <span class="pill">Pickups &amp; mines!</span>
+          <span class="pill">Best‑yield routing!</span>
+          <span class="pill">No login required!</span>
+        </div>
+
+        <div class="mt-8 flex items-center gap-3">
+          <a class="btn" href="https://github.com/boswen/chiral-cartographer" target="_blank" rel="noopener">View on GitHub!</a>
+          <a class="btn" href="mailto:help@chiralcartographer.com?subject=Keep%20me%20posted!">Get updates!</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="text-sm uppercase tracking-wide opacity-70 mb-2">** Coming soon! **</div>
+        <h2 class="text-xl font-semibold mb-3">A builder’s companion for Death Stranding 2</h2>
+        <ul class="space-y-2 text-neutral-300">
+          <li>• Add road segments, monorail lines, and other structures, then track remaining resources.</li>
+          <li>• Mark unlocked preppers/outposts and mines, including upgrade levels and yields.</li>
+          <li>• Generate a master shopping list and efficient pickup plans.</li>
+          <li>• Prioritize finite outpost stock, then allocate to best‑yield mines by crystal rate.</li>
+        </ul>
+        <p class="mt-4 text-neutral-400 text-sm">Fan project. Not affiliated with Kojima Productions or Sony Interactive Entertainment.</p>
+      </div>
+    </section>
+
+    <section class="mt-12 card">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="text-sm uppercase tracking-wide opacity-70">Status</div>
+          <div class="text-lg font-medium">Phase: Teaser</div>
+          <p class="text-neutral-300 mt-1">Public alpha coming after core planner &amp; import/export land.</p>
+        </div>
+        <img src="res/logo.png" alt="The Chiral Cartographer Logo" class="inline-block object-contain ml-2" onerror="this.style.display='none';" style="width:256px; height:256px;">
+      </div>
+    </section>
+
+    <footer class="mt-10 text-center text-xs opacity-60">
+      © <span id="year"></span> The Chiral Cartographer — Stick, Rope, Rail, &amp; Road
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
