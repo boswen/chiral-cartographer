@@ -1,0 +1,8 @@
+### When ready to make the full site go live, uncomment the below: ###
+# /        /app    302
+
+# Let the React app handle its own routes under /app
+/app/*   /app/index.html   200
+
+# Catch-all: anything else should fall back to the splash
+/*       /index.html       200
