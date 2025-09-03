@@ -1,11 +1,11 @@
 // Death Stranding 2 - Locations Data
 // Based on research from IGN wikis and game mechanics
 
-export const preppers = [
+export const Preppers = [
   {
     id: 'ciudad-nudo-del-norte',
     name: 'Ciudad Nudo del Norte (C1)',
-    type: 'facility',
+    type: 'Facility',
     region: 'Mexico',
     unlockRequirement: 'Complete Main Order #2',
     connectionLevels: {
@@ -37,7 +37,7 @@ export const preppers = [
   {
     id: 'villa-libre',
     name: 'Villa Libre',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Mexico',
     unlockRequirement: 'Complete Main Order #3',
     connectionLevels: {
@@ -69,7 +69,7 @@ export const preppers = [
   {
     id: 'c1-south-distribution',
     name: 'C1 South Distribution Center',
-    type: 'facility',
+    type: 'Facility',
     region: 'Mexico',
     unlockRequirement: 'Complete Main Order #4',
     connectionLevels: {
@@ -101,7 +101,7 @@ export const preppers = [
   {
     id: 'former-geophysics-lab',
     name: 'Former Geophysics Research Lab',
-    type: 'facility',
+    type: 'Facility',
     region: 'Mexico',
     unlockRequirement: 'Complete Main Order #5',
     connectionLevels: {
@@ -133,7 +133,7 @@ export const preppers = [
   {
     id: 'the-bokka',
     name: 'The Bokka',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Mexico',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -155,7 +155,7 @@ export const preppers = [
   {
     id: 'the-artist',
     name: 'The Artist',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Mexico',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -179,7 +179,7 @@ export const preppers = [
   {
     id: 'the-governments-base',
     name: "The Government's Base",
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -201,7 +201,7 @@ export const preppers = [
   {
     id: 'the-lone-commander',
     name: 'The Lone Commander',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -223,7 +223,7 @@ export const preppers = [
   {
     id: 'western-environmental-observatory',
     name: 'Western Environmental Observatory',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -245,7 +245,7 @@ export const preppers = [
   {
     id: 'west-fort-knot-f1',
     name: 'West Fort Knot (F1)',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -267,7 +267,7 @@ export const preppers = [
   {
     id: 'rainbow-valley',
     name: 'Rainbow Valley',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -289,7 +289,7 @@ export const preppers = [
   {
     id: 'rainys-shelter',
     name: "Rainy's Shelter",
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -311,7 +311,7 @@ export const preppers = [
   {
     id: 'the-musician',
     name: 'The Musician',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -333,7 +333,7 @@ export const preppers = [
   {
     id: 'the-inventor',
     name: 'The Inventor',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -355,7 +355,7 @@ export const preppers = [
   {
     id: 'animal-shelter',
     name: 'Animal Shelter',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -377,7 +377,7 @@ export const preppers = [
   {
     id: 'f2-south-distribution-centre',
     name: 'F2 South Distribution Centre',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -399,7 +399,7 @@ export const preppers = [
   {
     id: 'northern-environmental-observatory',
     name: 'Northern Environmental Observatory',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -421,7 +421,7 @@ export const preppers = [
   {
     id: 'the-dowser',
     name: 'The Dowser',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -443,7 +443,7 @@ export const preppers = [
   {
     id: 'the-architect',
     name: 'The Architect',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -465,7 +465,7 @@ export const preppers = [
   {
     id: 'the-metagenomicist',
     name: 'The Metagenomicist',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -487,7 +487,7 @@ export const preppers = [
   {
     id: 'the-fisherman',
     name: 'The Fisherman',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -509,7 +509,7 @@ export const preppers = [
   {
     id: 'heartmans-lab',
     name: "Heartman's Lab",
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -531,7 +531,7 @@ export const preppers = [
   {
     id: 'the-pizza-chef',
     name: 'The Pizza Chef',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -553,7 +553,7 @@ export const preppers = [
   {
     id: 'the-data-scientist',
     name: 'The Data Scientist',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -575,7 +575,7 @@ export const preppers = [
   {
     id: 'the-pioneer',
     name: 'The Pioneer',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -597,7 +597,7 @@ export const preppers = [
   {
     id: 'the-motherhood',
     name: 'The Motherhood',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -619,7 +619,7 @@ export const preppers = [
   {
     id: 'the-mechanic',
     name: 'The Mechanic',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -641,7 +641,7 @@ export const preppers = [
   {
     id: 'the-ghost-hunter',
     name: 'The Ghost Hunter',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -663,7 +663,7 @@ export const preppers = [
   {
     id: 'the-chronobiologist',
     name: 'The Chronobiologist',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -685,7 +685,7 @@ export const preppers = [
   {
     id: 'east-fort-knot-f4',
     name: 'East Fort Knot (F4)',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -707,7 +707,7 @@ export const preppers = [
   {
     id: 'the-tar-therapist',
     name: 'The Tar Therapist',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -729,7 +729,7 @@ export const preppers = [
   {
     id: 'south-fort-knot-f6',
     name: 'South Fort Knot (F6)',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -751,7 +751,7 @@ export const preppers = [
   {
     id: 'southern-environmental-observatory',
     name: 'Southern Environmental Observatory',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -773,7 +773,7 @@ export const preppers = [
   {
     id: 'f7-north-distribution-centre',
     name: 'F7 North Distribution Centre',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -795,7 +795,7 @@ export const preppers = [
   {
     id: 'bpas',
     name: 'BPAS',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -817,7 +817,7 @@ export const preppers = [
   {
     id: 'the-phantom-smith',
     name: 'The Phantom Smith',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -839,7 +839,7 @@ export const preppers = [
   {
     id: 'eastern-environmental-observatory',
     name: 'Eastern Environmental Observatory',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -861,7 +861,7 @@ export const preppers = [
   {
     id: 'the-aeronautical-engineer',
     name: 'The Aeronautical Engineer',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -883,7 +883,7 @@ export const preppers = [
   {
     id: 'f5-east-distribution-centre',
     name: 'F5 East Distribution Centre',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -905,7 +905,7 @@ export const preppers = [
   {
     id: 'mr-impossible',
     name: 'Mr. Impossible',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -927,7 +927,7 @@ export const preppers = [
   {
     id: 'the-adventurer',
     name: 'The Adventurer',
-    type: 'prepper',
+    type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -949,7 +949,7 @@ export const preppers = [
   {
     id: 'terminal-fort-knot',
     name: 'Terminal Fort Knot',
-    type: 'facility',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -1090,5 +1090,5 @@ export const mines = [
   }
 ];
 
-export const allLocations = [...preppers, ...mines];
+export const allLocations = [...Preppers, ...mines];
 

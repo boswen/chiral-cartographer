@@ -400,7 +400,7 @@ function App() {
           </TabsList>
           
           <TabsContent value="preppers" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
               {userLocations.filter(loc => loc.type !== 'mine').map(location => (
                 <Card key={location.id} className="location-card">
                   <CardHeader className="pb-3">
@@ -413,7 +413,7 @@ function App() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant={location.type === 'facility' ? 'default' : 'secondary'}>
+                        <Badge variant={location.type === 'Facility' ? 'default' : 'secondary'}>
                           {location.type}
                         </Badge>
                         <Switch 
@@ -426,24 +426,31 @@ function App() {
                   <CardContent className="space-y-3">
                     <div className="flex items-center justify-between">
                       <Label className="text-sm">Connection Level:</Label>
-                      <Select 
-                        value={location.connectionLevel?.toString() || '1'}
-                        onValueChange={(value) => updateLocationProperty(location.id, 'connectionLevel', parseInt(value))}
-                        disabled={!location.unlocked}
-                      >
-                        <SelectTrigger className="w-16">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {[1, 2, 3, 4, 5].map(level => (
-                            <SelectItem key={level} value={level.toString()}>{level}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <div className="flex items-center gap-0.5">
+                        {[1, 2, 3, 4, 5].map(level => (
+                          <button
+                            key={level}
+                            type="button"
+                            disabled={!location.unlocked}
+                            onClick={() => updateLocationProperty(location.id, 'connectionLevel', level)}
+                            className={`w-6 h-6 flex items-center justify-center text-3xl transition-all duration-200 hover:scale-125 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 ${
+                              level <= (location.connectionLevel || 1) 
+                                ? 'text-accent drop-shadow-sm' 
+                                : 'text-muted-foreground/40 hover:text-accent/70'
+                            }`}
+                            title={`Connection Level ${level}`}
+                          >
+                            ★
+                          </button>
+                        ))}
+                        <span className="ml-2 text-xs text-muted-foreground">
+                          {location.connectionLevel || 1}/5
+                        </span>
+                      </div>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <Label className="text-sm">Enabled:</Label>
+                      <Label className="text-sm">Collect resources from here?</Label>
                       <Switch 
                         checked={location.active}
                         onCheckedChange={(checked) => updateLocationProperty(location.id, 'active', checked)}
