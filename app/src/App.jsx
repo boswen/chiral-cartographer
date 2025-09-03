@@ -156,7 +156,7 @@ function App() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'tcc-json-backup.txt'
+    a.download = 'tcc-data-backup.txt.json'
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -731,8 +731,9 @@ function App() {
       <Card className="settings-card">
         <CardHeader className="pb-4">
           <CardTitle className="text-2xl font-bold text-accent flex items-center gap-2">
-            <Heart className="w-6 h-6" />
-            Join Us in Supporting Extra Life 🎮💙
+            <Heart className="w-6 h-6" />💙
+            Join Us in Supporting Extra Life
+            💙<Heart className="w-6 h-6" />
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -748,7 +749,7 @@ function App() {
       <Card className="settings-card">
         <CardHeader className="pb-4">
           <CardTitle className="text-xl font-bold text-accent">
-            How You Can Help
+          🎮 How You Can Help
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -783,7 +784,7 @@ function App() {
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
               onClick={() => window.open('https://www.extra-life.org/participants/BoswenMcBastok/donate', '_blank')}
-              variant="default"
+              variant="outline"
               className="flex items-center gap-2"
             >
               <Heart className="w-4 h-4" />
@@ -804,7 +805,7 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="border-b border-border bg-card/50">
         <div className="container mx-auto px-4 py-4">
@@ -875,7 +876,7 @@ function App() {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 flex-1">
         {activeTab === 'buildqueue' && renderBuildQueueTab()}
         {activeTab === 'structures' && renderStructuresTab()}
         {activeTab === 'locations' && renderLocationsTab()}
@@ -883,6 +884,18 @@ function App() {
         {activeTab === 'settings' && renderSettingsTab()}
         {activeTab === 'extralife' && renderExtraLifeTab()}
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card/50">
+        <div className="container mx-auto px-4 py-6">
+          <p className="text-center text-muted-foreground">
+            © {new Date().getFullYear()} The Chiral Cartographer — Stick, Rope, Rail, & Road
+          </p>
+          <p className="text-center italic text-sm text-muted-foreground/70">
+            A Community-Built Infrastructure Planning Tool for Death Stranding 2!
+          </p>          
+        </div>
+      </footer>
     </div>
   )
 }

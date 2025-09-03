@@ -37,7 +37,7 @@ export const preppers = [
   {
     id: 'villa-libre',
     name: 'Villa Libre',
-    type: 'facility',
+    type: 'prepper',
     region: 'Mexico',
     unlockRequirement: 'Complete Main Order #3',
     connectionLevels: {
@@ -179,7 +179,7 @@ export const preppers = [
   {
     id: 'the-governments-base',
     name: "The Government's Base",
-    type: 'facility',
+    type: 'prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -355,7 +355,7 @@ export const preppers = [
   {
     id: 'animal-shelter',
     name: 'Animal Shelter',
-    type: 'facility',
+    type: 'prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -597,7 +597,7 @@ export const preppers = [
   {
     id: 'the-motherhood',
     name: 'The Motherhood',
-    type: 'prepper',
+    type: 'facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
