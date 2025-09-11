@@ -99,7 +99,12 @@
   }
   
   .nav-tab {
-    @apply px-6 py-3 text-sm font-medium text-muted-foreground hover:text-foreground border-b-2 border-transparent hover:border-primary/50 transition-all duration-200;
+    @apply inline-flex items-center gap-2
+    h-10 px-4
+    text-sm font-medium leading-none font-sans
+    text-muted-foreground hover:text-foreground
+    border-b-2 border-transparent hover:border-primary/50
+    transition-all duration-200 whitespace-nowrap -mb-px;
   }
   
   .nav-tab.active {
@@ -145,3 +150,7 @@
     @apply border-destructive/20 bg-destructive/5;
   }
 }
+
+/* Hide horizontal scrollbar while preserving scrollability */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
