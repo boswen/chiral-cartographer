@@ -798,7 +798,7 @@ function App() {
               Donate Now!
             </Button>
             <Button 
-              onClick={() => window.open('https://www.extra-life.org/teams/ExtraLifeSpaceCoast', '_blank')}
+              onClick={() => window.open('https://www.extra-life.org/index.cfm?fuseaction=register.start&eventID=559&teamID=69344&success=donordrive.team&successParameters=teamID', '_blank')}
               variant="outline"
               className="flex items-center gap-2"
             >
@@ -842,7 +842,7 @@ function App() {
       {/* Navigation */}
       <nav className="border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="flex space-x-0">
+          <div className="flex overflow-x-auto md:overflow-visible no-scrollbar py-2 -mx4 px-4 scroll-px-4">
             {[
               { id: 'buildqueue', label: 'Build Queue', icon: ListTodo },
               { id: 'structures', label: 'Structures', icon: Building },
@@ -857,7 +857,7 @@ function App() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`nav-tab ${activeTab === tab.id ? 'active' : ''}`}
                 >
-                  <Icon className="w-4 h-4 mr-2" />
+                  <Icon className="w-4 h-4 shrink-0" />
                   {tab.label}
                 </button>
               )
@@ -866,16 +866,16 @@ function App() {
               href="https://mapgenie.io/death-stranding-2"
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-tab hover:text-accent"
+              className="nav-tab hover:text-accent shrink-0 whitespace-nowrap"
             >
-              <ExternalLink className="w-4 h-4 mr-2" />
+              <ExternalLink className="w-4 h-4 shrink-0" />
               Map
             </a>
             <button
               onClick={() => setActiveTab('extralife')}
-              className={`nav-tab ${activeTab === 'extralife' ? 'active' : ''}`}
+              className={`nav-tab shrink-0 whitespace-nowrap ${activeTab === 'extralife' ? 'active' : ''}`}
             >
-              <Heart className="w-4 h-4 mr-2" />
+              <Heart className="w-4 h-4 shrink-0" />
               Extra Life
             </button>
           </div>
