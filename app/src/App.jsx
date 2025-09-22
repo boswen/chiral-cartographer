@@ -261,21 +261,79 @@ function App() {
                       amount > 0 && (
                         <div key={material} className="flex items-center justify-between">
                           <span className="text-sm">{formatMaterialName(material)}:</span>
+                          
                           <div className="flex items-center gap-1">
                             <Button 
                               size="sm" 
                               variant="outline"
                               onClick={() => updateMaterialRequirement(item.id, material, amount - 50)}
                               className="h-6 w-6 p-0"
+                              title="-50"
+                              aria-label="Decrease by 50"
                             >
                               <Minus className="w-3 h-3" />
                             </Button>
-                            <span className="w-16 text-center text-sm font-medium">{amount}</span>
+
+                            <input
+                              type="number"
+                              inputMode="numeric"
+                              min={0}
+                              step={1}
+                              value={amount}
+                              onChange={(e) => {
+                                const raw = e.target.value;
+
+                                // 1) Ignore empty edits (don’t mutate state mid-edit)
+                                if (raw === "") return;
+
+                                // 2) Ignore non-numeric input (prevents accidental deletion)
+                                const next = Number(raw);
+                                if (Number.isNaN(next)) return;
+
+                                // 3) Commit valid numbers
+                                updateMaterialRequirement(
+                                  item.id,
+                                  material,
+                                  Math.max(0, Math.floor(next))
+                                );
+                              }}
+
+                              // Prevent mouse wheel changing the value
+                              onWheel={(e) => e.currentTarget.blur()}
+
+                              // Block characters browsers allow in number inputs (e/E/+/-/.)
+                              onKeyDown={(e) => {
+                                if (["e", "E", "+", "-", "."].includes(e.key)) e.preventDefault();
+                                if (e.key === "Enter") e.currentTarget.blur();
+                              }}
+
+                              // Block pasting non-digits
+                              onPaste={(e) => {
+                                const txt = (e.clipboardData || window.clipboardData).getData("text");
+                                if (!/^\d+$/.test(txt)) e.preventDefault();
+                              }}
+                              
+                              // Safety net on blur: normalize whatever is there
+                              onBlur={(e) => {
+                                const next = parseInt(e.target.value, 10);
+                                updateMaterialRequirement(
+                                  item.id,
+                                  material,
+                                  Number.isNaN(next) ? amount : Math.max(0, next)
+                                );
+                              }}                              
+
+                              className="h-6 w-20 px-2 text-center text-sm border border-border rounded focus:outline-none focus:ring-2 focus:ring-accent"
+                              aria-label={`${formatMaterialName(material)} quantity`}
+                            />
+
                             <Button 
                               size="sm" 
                               variant="outline"
                               onClick={() => updateMaterialRequirement(item.id, material, amount + 50)}
                               className="h-6 w-6 p-0"
+                              title="+50"
+                              aria-label="Increase by 50"
                             >
                               <Plus className="w-3 h-3" />
                             </Button>
