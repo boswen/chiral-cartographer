@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useToast } from "./ToastProvider";
+import { Plus } from 'lucide-react'
 
 export function AddStructureButton({ onAdd }) {
   const [flash, setFlash] = useState(false);
@@ -17,15 +18,15 @@ export function AddStructureButton({ onAdd }) {
       type="button"
       onClick={handleClick}
       className={[
-        "inline-flex h-8 w-8 items-center justify-center rounded-md border text-base font-bold transition",
+        "inline-flex h-8 w-10 size items-center justify-center rounded-md border text-accent font-bold transition",
         flash
           ? "bg-green-500 border-green-600 text-white"
-          : "bg-background border-border hover:bg-accent"
+          : "bg-background border-border hover:bg-accent hover:text-accent-foreground"
       ].join(" ")}
       aria-label="Add"
       title="Add"
     >
-      +
+      <Plus className="w-4 h-4" />
     </button>
   );
 }

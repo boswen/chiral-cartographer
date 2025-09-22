@@ -15,7 +15,7 @@ import { structures, structureCategories, pccLevels, formatMaterialName } from '
 import { ResourceCalculator } from './utils/resourceCalculator.js'
 import './App.css'
 import { ToastProvider } from "./ToastProvider";
-import { AddStructureButton } from "./PlusButton";
+import { AddStructureButton } from "./AddStructureButton";
 
 
 console.log('Import check - allLocations:', allLocations?.length, 'items')
@@ -355,14 +355,15 @@ function App() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">{structure.name}</CardTitle>
-                <Button 
+                {/* <Button 
                   size="sm" 
                   variant="outline"
                   onClick={() => addToBuildQueue(structure)}
                   className="text-accent hover:text-accent-foreground"
                 >
                   <Plus className="w-4 h-4" />
-                </Button>
+                </Button> */}
+                <AddStructureButton onAdd={() => addToBuildQueue(structure)} />
               </div>
               <Badge variant="secondary">
                 {typeof structure.pccLevel === 'number' ? `PCC Level ${structure.pccLevel}` : structure.pccLevel}
