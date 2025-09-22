@@ -14,6 +14,10 @@ import { allLocations } from './data/locations.js'
 import { structures, structureCategories, pccLevels, formatMaterialName } from './data/structures.js'
 import { ResourceCalculator } from './utils/resourceCalculator.js'
 import './App.css'
+import { ToastProvider } from "./ToastProvider";
+import { AddStructureButton } from "./PlusButton";
+
+
 console.log('Import check - allLocations:', allLocations?.length, 'items')
 
 function App() {
@@ -812,7 +816,8 @@ function App() {
   )
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <ToastProvider>
+      <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="border-b border-border bg-card/50">
         <div className="container mx-auto px-4 py-4">
@@ -829,11 +834,6 @@ function App() {
               <Badge variant="outline" className="text-accent">
                 Build Queue: {buildQueue.length}
               </Badge>
-              {sourcingRecommendations && (
-                <Badge variant="outline" className="text-primary">
-                  CC Needed: {sourcingRecommendations.totalChiralCrystalsNeeded}
-                </Badge>
-              )}
             </div>
           </div>
         </div>
@@ -903,9 +903,9 @@ function App() {
           </p>          
         </div>
       </footer>
-    </div>
+      </div>
+    </ToastProvider>
   )
 }
 
 export default App
-
