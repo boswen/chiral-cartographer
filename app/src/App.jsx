@@ -880,16 +880,24 @@ function App() {
       {/* Header */}
       <header className="border-b border-border bg-card/50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-accent chiral-glow">
+          {/* 2x2 grid:
+              Row 1: Title spans both columns
+              Row 2: Subtitle (left) | Badge (right) */}
+          <div className="grid gap-0 md:gap-0 grid-cols-[1fr_auto] grid-rows-[auto_auto] items-center">
+            {/* Title (spans both cols) */}
+            <div className="col-span-2 min-w-0">
+              <h1 className="inline-block text-2xl font-bold text-accent chiral-glow whitespace-nowrap">
                 THE CHIRAL CARTOGRAPHER
               </h1>
-              <p className="text-sm text-muted-foreground">
-                "Stick, Rope, Rail, and Road"
-              </p>
             </div>
-            <div className="flex items-center gap-4">
+
+            {/* Subtitle (left, row 2) */}
+            <p className="text-sm text-muted-foreground truncate">
+              "Stick, Rope, Rail, and Road"
+            </p>
+
+            {/* Badge (right, row 2) */}
+            <div className="justify-self-end">
               <Badge variant="outline" className="text-accent">
                 Build Queue: {buildQueue.length}
               </Badge>
