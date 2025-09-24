@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!btn || !ring || !bezel) return;
 
-  // --- sound setup ---
-  let sfx;        // HTMLAudioElement for reuse
+  // --- Low-latency SFX via Web Audio: prefetch & decode once, then play instantly ---
+  let audioCtx;               // AudioContext
+  let audioBuffer = null;     // decoded audio
+  let currentSource = null;   // the playing BufferSource
   let sfxReady = false;
 
   function pickSfxUrl() {
@@ -16,33 +18,62 @@ document.addEventListener("DOMContentLoaded", () => {
     return '/sfx/activate.mp3'; // fallback to MP3
   }
 
-  function ensureSfx() {
-    if (!sfxReady) {
-      sfx = new Audio(pickSfxUrl());
-      sfx.preload = 'auto';
-      try { sfx.load(); } catch {}
+  // Select an audio type based on support
+  // const SFX_URL = '/sfx/activate.m4a';
+  const SFX_URL = pickSfxUrl();
+
+  // Preload & decode ASAP after DOM is ready (so decoding can happen before a gesture)
+  (async function preloadSfx() {
+    try {
+      const resp = await fetch(SFX_URL, { cache: 'force-cache' });
+      const data = await resp.arrayBuffer();
+      // Create a context just for decoding; we'll (re)use it for playback too.
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      audioBuffer = await audioCtx.decodeAudioData(data);
+      // Save power; we'll resume on first user gesture
+      if (audioCtx.state === 'running') await audioCtx.suspend();
       sfxReady = true;
+    } catch (err) {
+      console.warn('SFX preload failed, falling back later:', err);
     }
-    return sfx;
-  }
+  })();
 
   // start immediately on press
-  function startSfx() {
-    const a = ensureSfx();
+  async function startSfx() {
     try {
-      a.currentTime = 0;
-      a.play().catch(() => {});
-    } catch {}
+      // Lazily create context if preload failed
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      // On iOS the context is suspended until a user gesture; resume now
+      if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+      // If we don’t have a decoded buffer yet (e.g., slow network), fetch/decode now
+      if (!audioBuffer) {
+        const resp = await fetch(SFX_URL, { cache: 'force-cache' });
+        const data = await resp.arrayBuffer();
+        audioBuffer = await audioCtx.decodeAudioData(data);
+      }
+
+      // Create a one-shot source and play
+      currentSource = audioCtx.createBufferSource();
+      currentSource.buffer = audioBuffer;
+      currentSource.connect(audioCtx.destination);
+      currentSource.start(0);
+    } catch (err) {
+      console.warn('SFX start failed:', err);
+    }
   }
 
   // stop immediately (for early release)
-  function stopSfx() {
-    if (!sfx) return;
-    try {
-      sfx.pause();
-      sfx.currentTime = 0;
-    } catch {}
-  }
+function stopSfx() {
+  try {
+    if (currentSource) {
+      // stop now; no error if it already ended
+      currentSource.stop(0);
+      currentSource.disconnect();
+      currentSource = null;
+    }
+  } catch {}
+}
 
   // ---- geometry (keep in sync with SVG) ----
   const RADIUS = 30;                          // matches r in the SVG
@@ -111,13 +142,16 @@ document.addEventListener("DOMContentLoaded", () => {
       // Let the SFX finish. If it already ended, navigate now.
       const go = () => (window.location.href = '/app/');
       
-      if (sfx && !sfx.paused) {
-        // if still playing, wait for the end (once)
-        const onEnd = () => { sfx?.removeEventListener('ended', onEnd); go(); };
-        sfx.addEventListener('ended', onEnd, { once: true });
-        
-        // safety timeout in case 'ended' doesn't fire (e.g., very short SFX)
-        setTimeout(() => { sfx?.removeEventListener('ended', onEnd); go(); }, 1600);
+      if (currentSource) {
+        // if still playing, wait for buffer finish, then vámonos!
+        const src = currentSource;
+        src.onended = () => {
+          if (src === currentSource) currentSource = null;
+          go();
+        };      
+        // safety timeout in case 'onended' doesn't fire (edge cases); go shortly after duration
+        const ms = Math.ceil((audioBuffer?.duration ?? 1.3) * 1000) + 50;
+        setTimeout(go, ms);
       } else {
         go(); // SFX already finished → navigate immediately
       }
