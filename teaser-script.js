@@ -6,74 +6,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!btn || !ring || !bezel) return;
 
-  // --- Low-latency SFX via Web Audio: prefetch & decode once, then play instantly ---
-  let audioCtx;               // AudioContext
-  let audioBuffer = null;     // decoded audio
-  let currentSource = null;   // the playing BufferSource
-  let sfxReady = false;
-
-  function pickSfxUrl() {
-    const a = document.createElement('audio');
-    if (a.canPlayType('audio/mp4; codecs="mp4a.40.2"')) return '/sfx/activate.m4a'; // AAC if available
-    return '/sfx/activate.mp3'; // fallback to MP3
-  }
+  // --- Instant SFX with offline decode preload (mobile + desktop safe) ---
+  let audioCtx = null;            // live AudioContext for playback
+  let audioBuffer = null;         // decoded, ready-to-play buffer
+  let audioArrayBuffer = null;    // raw file bytes (fallback if offline decode fails)
+  let currentSource = null;       // currently playing source node
 
   // Select an audio type based on support
-  // const SFX_URL = '/sfx/activate.m4a';
-  const SFX_URL = pickSfxUrl();
+  function pickSfxUrl() {
+    const a = document.createElement('audio');
+    return a.canPlayType('audio/mp4; codecs="mp4a.40.2"')
+      ? '/sfx/activate.m4a'
+      : '/sfx/activate.mp3';
+  }
 
-  // Preload & decode ASAP after DOM is ready (so decoding can happen before a gesture)
+  // Preload immediately after DOM is ready: fetch + offline decode (no gesture needed)
   (async function preloadSfx() {
     try {
-      const resp = await fetch(SFX_URL, { cache: 'force-cache' });
-      const data = await resp.arrayBuffer();
-      // Create a context just for decoding; we'll (re)use it for playback too.
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      audioBuffer = await audioCtx.decodeAudioData(data);
-      // Save power; we'll resume on first user gesture
-      if (audioCtx.state === 'running') await audioCtx.suspend();
-      sfxReady = true;
+      const resp = await fetch(pickSfxUrl(), { cache: 'force-cache' });
+      audioArrayBuffer = await resp.arrayBuffer();
+
+      // Decode without spinning up a real AudioContext (works before a gesture)
+      if ('OfflineAudioContext' in window) {
+        const oac = new OfflineAudioContext(1, 1, 44100);
+        // .slice() to give decode a standalone buffer and avoid neutering our cached one
+        audioBuffer = await oac.decodeAudioData(audioArrayBuffer.slice(0));
+      }
     } catch (err) {
-      console.warn('SFX preload failed, falling back later:', err);
+      console.warn('SFX preload failed:', err);
     }
   })();
+
+  async function ensureContextResumed() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state !== 'running') {
+      await audioCtx.resume(); // iOS requires this inside a gesture
+    }
+  }
 
   // start immediately on press
   async function startSfx() {
     try {
-      // Lazily create context if preload failed
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      // On iOS the context is suspended until a user gesture; resume now
-      if (audioCtx.state === 'suspended') await audioCtx.resume();
+      await ensureContextResumed();
 
-      // If we don’t have a decoded buffer yet (e.g., slow network), fetch/decode now
+      // If we don’t have a decoded buffer yet (e.g., slow network), fetch/decode now on the live context
       if (!audioBuffer) {
-        const resp = await fetch(SFX_URL, { cache: 'force-cache' });
-        const data = await resp.arrayBuffer();
-        audioBuffer = await audioCtx.decodeAudioData(data);
+        if (!audioArrayBuffer) {
+          const resp = await fetch(pickSfxUrl(), { cache: 'force-cache' });
+          audioArrayBuffer = await resp.arrayBuffer();
+        }
+        audioBuffer = await audioCtx.decodeAudioData(audioArrayBuffer.slice(0));
       }
 
-      // Create a one-shot source and play
+      // Create a one-shot source and start slightly in the future to avoid clipped attack
       currentSource = audioCtx.createBufferSource();
       currentSource.buffer = audioBuffer;
       currentSource.connect(audioCtx.destination);
-      currentSource.start(0);
+      currentSource.start(audioCtx.currentTime + 0.02); // 20ms scheduling cushion
     } catch (err) {
       console.warn('SFX start failed:', err);
     }
   }
 
   // stop immediately (for early release)
-function stopSfx() {
-  try {
-    if (currentSource) {
-      // stop now; no error if it already ended
-      currentSource.stop(0);
-      currentSource.disconnect();
-      currentSource = null;
-    }
-  } catch {}
-}
+  function stopSfx() {
+    try {
+      if (currentSource) {
+        // stop now; no error if it already ended
+        currentSource.stop(0);
+        currentSource.disconnect();
+        currentSource = null;
+      }
+    } catch {}
+  }
 
   // ---- geometry (keep in sync with SVG) ----
   const RADIUS = 30;                          // matches r in the SVG
