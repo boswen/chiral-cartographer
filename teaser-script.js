@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let audioBuffer = null;         // decoded, ready-to-play buffer
   let audioArrayBuffer = null;    // raw file bytes (fallback if offline decode fails)
   let currentSource = null;       // currently playing source node
+  let audioFetchPromise = null;   // tracks outstanding fetch
+  let audioDecodePromise = null;  // tracks outstanding decode
+  let fallbackAudioEl = null;     // HTMLAudioElement fallback when buffer is not ready
 
   // Select an audio type based on support
   function pickSfxUrl() {
@@ -19,52 +22,131 @@ document.addEventListener("DOMContentLoaded", () => {
       ? '/sfx/activate.m4a'
       : '/sfx/activate.mp3';
   }
+  const sfxUrl = pickSfxUrl();
 
-  // Preload immediately after DOM is ready: fetch + offline decode (no gesture needed)
-  (async function preloadSfx() {
-    try {
-      const resp = await fetch(pickSfxUrl(), { cache: 'force-cache' });
-      audioArrayBuffer = await resp.arrayBuffer();
-
-      // Decode without spinning up a real AudioContext (works before a gesture)
-      if ('OfflineAudioContext' in window) {
-        const oac = new OfflineAudioContext(1, 1, 44100);
-        // .slice() to give decode a standalone buffer and avoid neutering our cached one
-        audioBuffer = await oac.decodeAudioData(audioArrayBuffer.slice(0));
-      }
-    } catch (err) {
-      console.warn('SFX preload failed:', err);
-    }
-  })();
-
-  async function ensureContextResumed() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state !== 'running') {
-      await audioCtx.resume(); // iOS requires this inside a gesture
-    }
+  function ensureSfxFetch() {
+    if (audioFetchPromise) return audioFetchPromise;
+    audioFetchPromise = fetch(sfxUrl, { cache: 'force-cache' })
+      .then(r => r.arrayBuffer())
+      .then(bytes => {
+        audioArrayBuffer = bytes;
+        return bytes;
+      })
+      .catch(err => {
+        console.warn('SFX preload fetch failed:', err);
+        audioArrayBuffer = null;
+        throw err;
+      });
+    return audioFetchPromise;
   }
 
-  // start immediately on press
-  async function startSfx() {
-    try {
-      await ensureContextResumed();
+  function ensureFallbackAudio() {
+    if (!fallbackAudioEl) {
+      fallbackAudioEl = new Audio(sfxUrl);
+      fallbackAudioEl.preload = 'auto';
+      fallbackAudioEl.crossOrigin = 'anonymous';
+      fallbackAudioEl.playsInline = true;
+    }
+    return fallbackAudioEl;
+  }
 
-      // If we don’t have a decoded buffer yet (e.g., slow network), fetch/decode now on the live context
-      if (!audioBuffer) {
-        if (!audioArrayBuffer) {
-          const resp = await fetch(pickSfxUrl(), { cache: 'force-cache' });
-          audioArrayBuffer = await resp.arrayBuffer();
-        }
-        audioBuffer = await audioCtx.decodeAudioData(audioArrayBuffer.slice(0));
+  function decodeWithAudioContext() {
+    if (!audioCtx) return Promise.resolve(null);
+    if (audioBuffer) return Promise.resolve(audioBuffer);
+    if (audioDecodePromise) return audioDecodePromise;
+
+    const sourcePromise = audioArrayBuffer
+      ? Promise.resolve(audioArrayBuffer)
+      : ensureSfxFetch();
+
+    audioDecodePromise = sourcePromise
+      .then(bytes => {
+        if (!bytes) return null;
+        return audioCtx.decodeAudioData(bytes.slice(0));
+      })
+      .then(buffer => {
+        audioBuffer = buffer;
+        return buffer;
+      })
+      .catch(err => {
+        console.warn('SFX decode failed:', err);
+        audioBuffer = null;
+        return null;
+      })
+      .finally(() => {
+        audioDecodePromise = null;
+      });
+
+    return audioDecodePromise;
+  }
+
+  // Preload immediately after DOM is ready: fetch raw bytes only
+  (function preloadSfx() {
+    ensureSfxFetch().catch(() => {});
+  })();
+
+  // start immediately on press - FIXED for mobile
+  function startSfx() {
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
 
-      // Create a one-shot source and start slightly in the future to avoid clipped attack
-      currentSource = audioCtx.createBufferSource();
-      currentSource.buffer = audioBuffer;
-      currentSource.connect(audioCtx.destination);
-      currentSource.start(audioCtx.currentTime + 0.02); // 20ms scheduling cushion
+      const playBuffer = (buffer) => {
+        if (!buffer || !audioCtx) return false;
+
+        if (fallbackAudioEl && !fallbackAudioEl.paused) {
+          try {
+            fallbackAudioEl.pause();
+            fallbackAudioEl.currentTime = 0;
+          } catch {}
+        }
+
+        if (currentSource) {
+          try {
+            currentSource.stop(0);
+            currentSource.disconnect();
+          } catch {}
+        }
+
+        currentSource = audioCtx.createBufferSource();
+        currentSource.buffer = buffer;
+        currentSource.connect(audioCtx.destination);
+        currentSource.start(0);
+        return true;
+      };
+
+      const resumePromise = (audioCtx.state === 'suspended' && typeof audioCtx.resume === 'function')
+        ? audioCtx.resume().catch(err => {
+            console.warn('Audio resume failed:', err);
+            return null;
+          })
+        : Promise.resolve();
+
+      // Kick off fetch early (does nothing if already started)
+      ensureSfxFetch();
+
+      if (playBuffer(audioBuffer)) {
+        return;
+      }
+
+      resumePromise.then(() => {
+        decodeWithAudioContext()
+          .then(buffer => {
+            if (!buffer) return;
+            if (!holding) return;
+            if (fallbackAudioEl && !fallbackAudioEl.paused) return;
+            playBuffer(buffer);
+          })
+          .catch(() => {});
+      });
+
+      const fallback = ensureFallbackAudio();
+      fallback.currentTime = 0;
+      const playPromise = fallback.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(err => console.warn('Fallback audio failed:', err));
+      }
     } catch (err) {
       console.warn('SFX start failed:', err);
     }
@@ -78,6 +160,10 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSource.stop(0);
         currentSource.disconnect();
         currentSource = null;
+      }
+      if (fallbackAudioEl && !fallbackAudioEl.paused) {
+        fallbackAudioEl.pause();
+        fallbackAudioEl.currentTime = 0;
       }
     } catch {}
   }
@@ -146,22 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
       completed = true;
       try { navigator.vibrate?.(15); } catch {}
       
-      // Let the SFX finish. If it already ended, navigate now.
-      const go = () => (window.location.href = '/app/');
-      
-      if (currentSource) {
-        // if still playing, wait for buffer finish, then vámonos!
-        const src = currentSource;
-        src.onended = () => {
-          if (src === currentSource) currentSource = null;
-          go();
-        };      
-        // safety timeout in case 'onended' doesn't fire (edge cases); go shortly after duration
-        const ms = Math.ceil((audioBuffer?.duration ?? 1.3) * 1000) + 50;
-        setTimeout(go, ms);
-      } else {
-        go(); // SFX already finished → navigate immediately
-      }
+      // go now; optional tiny cushion so the click isn't cut instantly
+      setTimeout(() => { window.location.href = '/app/'; }, 75);
 
       stop(false);
       return;
@@ -174,7 +246,14 @@ document.addEventListener("DOMContentLoaded", () => {
     try { e.currentTarget.setPointerCapture?.(e.pointerId); } catch {}
     if (holding) return;
     holding = true; t0 = 0; completed = false;
-    startSfx();   // <— start sound immediately, just like in DS2
+    startSfx();   // start sound immediately (async covers mobile first-press)
+  
+    // temp fix w/ basic audio element
+    // let audioEl = new Audio(sfxUrl);
+    // audioEl.preload = 'auto';
+    // audioEl.currentTime = 0;
+    // audioEl.play();
+  
     raf = requestAnimationFrame(tick);
   };
 
@@ -183,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try { e.currentTarget.releasePointerCapture?.(e.pointerId); } catch {}
     const wasHolding = holding;         // to decide SFX stop
     stop(true);
-    if (!completed && wasHolding) stopSfx();   // <— cut sound instantly if released early
+    if (!completed && wasHolding) stopSfx();   // cut sound instantly if the hold ends early
   };
 
   // Pointer + keyboard (Space/Enter) listeners
