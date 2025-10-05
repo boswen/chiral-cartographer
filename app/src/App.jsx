@@ -909,7 +909,7 @@ function App() {
       {/* Navigation */}
       <nav className="border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="flex gap-2 overflow-x-auto md:overflow-visible no-scrollbar py-2 -mx-4 px-4 scroll-px-4">
+          <div className="flex gap-2 overflow-x-auto md:overflow-visible md:justify-center no-scrollbar py-2 -mx-4 px-4 scroll-px-4">
             {[
               { id: 'buildqueue', label: 'Build Queue', icon: ListTodo },
               { id: 'structures', label: 'Structures', icon: Building },
@@ -922,7 +922,8 @@ function App() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`nav-tab shrink-0 whitespace-nowrap ${activeTab === tab.id ? 'active' : ''}`}
+                  className={`nav-tab shrink-0 whitespace-nowrap
+                    ${activeTab === tab.id ? 'active' : ''}`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
                   {tab.label}
@@ -938,6 +939,15 @@ function App() {
               <ExternalLink className="w-4 h-4 shrink-0" />
               Map
             </a>
+            <a
+              href="/faq.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-tab hover:text-accent shrink-0 whitespace-nowrap"
+            >
+              <ExternalLink className="w-4 h-4 shrink-0" />
+              FAQ
+            </a>            
             <button
               onClick={() => setActiveTab('extralife')}
               className={`nav-tab shrink-0 whitespace-nowrap ${activeTab === 'extralife' ? 'active' : ''}`}
