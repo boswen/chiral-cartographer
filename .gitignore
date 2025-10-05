@@ -1,8 +1,12 @@
 # Compiled class file
 *.class
 
-# Log file
+# logs & OS cruft
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 *.log
+.DS_Store
 
 # BlueJ files
 *.ctxt

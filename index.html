@@ -3,18 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Chiral Cartographer — Coming Soon!</title>
+  <title>The Chiral Cartographer — Beta Version</title>
   <meta name="description" content="Stick, Rope, Rail, & Road — a fan-made atlas for Death Stranding 2 builders.">
-  <meta property="og:title" content="The Chiral Cartographer — Coming Soon" />
+  <meta property="og:title" content="The Chiral Cartographer — Beta version!" />
   <meta property="og:description" content="Forge your paths, plan your runs, and connect the world — one strand at a time." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://chiralcartographer.com/" />
+  <meta property="og:site_name" content="The Chiral Cartographer"/>
+  <meta property="og:locale" content="en_US"/>
   <meta property="og:image" content="https://chiralcartographer.com/res/og-image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Teaser/welcome page for TCC. A simple page with a fun button experience!"/>
+  <meta property="og:type" content="website"/>
   <link rel="icon" href="res/favicon.ico" />
-  <!-- Tailwind CDN (for a quick teaser page) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="teaser-script.js" defer></script>
+  <!-- <link rel="preload" as="audio" href="/sfx/activate.m4a" type="audio/mp4" /> -->
+  <!-- <link rel="preload" as="audio" href="/sfx/activate.mp3" type="audio/mpeg" /> -->
+  <!-- <link id="sfx-preload" rel="preload" as="audio"> -->
+
   <style>
-    /* Fallback if Tailwind is blocked: minimal sensible defaults */
+    /* Fallback if Tailwind is blocked with a few minimal sensible defaults */
     body{background:#0a0a0a;color:#f3f3f3;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;}
     .container{max-width:1100px;margin:0 auto;padding:2rem;}
     .card{background:rgba(255,255,255,0.04);border-radius:1.25rem;padding:1.25rem;border:1px solid rgba(255,255,255,0.06);}
@@ -25,7 +35,7 @@
 </head>
 <body class="bg-neutral-950 text-neutral-100">
   <div class="bg-indigo-700 text-white text-center font-extrabold py-3 text-2xl tracking-wide">
-    ** COMING SOON! **
+    ** BETA VERSION IS LIVE! **
   </div>
   <main class="container">
     <header class="flex items-center justify-between gap-4 mb-10">
@@ -40,53 +50,106 @@
     <section class="grid md:grid-cols-2 gap-8 items-center">
       <div>
         <div class="flex items-center gap-3">
-	  <img src="res/logo-mini.png" alt="The Chiral Cartographer Logo" class="h-12 w-12 md:h-16 md:w-16 object-contain" />
-  	  <div>
-	    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
-	      The Chiral Cartographer
-	    </h1>
-	    <p class="mt-2 text-lg md:text-xl opacity-90">
-	      Stick, Rope, Rail, &amp; Road
-	    </p>
-	  </div>
-	</div>
-	<p class="mt-5 text-neutral-300">Forge your paths, plan your runs, and connect the world — one strand at a time.</p>
+        <img src="res/logo-mini.png" alt="The Chiral Cartographer Logo" class="h-16 w-16 md:h-24 md:w-24 object-contain" />
+          <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+            The Chiral Cartographer
+          </h1>
+          <p class="mt-2 text-lg md:text-xl opacity-90">
+            Stick, Rope, Rail, &amp; Road
+          </p>
+          </div>
+        </div>
+        <p class="mt-5 text-neutral-300">Forge your paths, plan your runs, and connect the world — one strand at a time.</p>
 
-        <div class="mt-6 flex flex-wrap gap-3">
+        <div class="mt-8 flex justify-center">
+          <button
+            id="hold-activate"
+            type="button"
+            class="btn relative inline-flex items-center gap-3 h-14 px-4 select-none"
+            aria-label="Activate Terminal"
+          >
+            <!-- DS2-style icon -->
+            <span class="relative inline-grid place-items-center" style="width:50px;height:50px">
+              <svg
+                width="50" height="51" viewBox="0 0 72 72" aria-hidden="true"
+                class="drop-shadow-sm"
+              >
+                <!-- static outer bezel with 4 segments (dashes set by JS for perfect quarters) -->
+                <circle id="hold-activate-bezel"
+                  cx="36" cy="36" r="30"
+                  fill="none" stroke="rgb(255 255 255)" stroke-width="6"
+                  stroke-linecap="round"
+                ></circle>
+
+                <!-- progress ring (fills clockwise; we animate dashoffset in JS) -->
+                <circle id="hold-activate-progress"
+                  cx="36" cy="36" r="30"
+                  fill="none" stroke="rgb(249 115 22)" stroke-width="6"
+                  class="transition-[stroke] duration-150 ease-linear"
+                  stroke-linecap="butt"
+                  transform="rotate(-90 36 36)"
+                ></circle>
+
+                <!-- inner blue ring -->
+                <circle
+                  cx="36" cy="36" r="20"
+                  fill="white" stroke="rgb(56 189 248)" stroke-width="8"
+                ></circle>
+
+                <!-- center square glyph (blue fill, light border) -->
+                <rect x="29" y="29" width="14" height="14" rx="2" ry="2"
+                  fill="white" stroke="rgb(56 189 248)" stroke-width="2"
+                ></rect>
+
+                <!-- north marker triangle -->
+                <polygon points="36,6 31,14 41,14" fill="rgb(246 232 195)"></polygon>
+              </svg>
+            </span>
+
+            <span class="text-2xl font-semibold tracking-wide">Activate Terminal</span>
+          </button>
+        </div>
+        <p class="mt-2 text-center italic text-xs text-neutral-400">Press &amp; hold ~2s to activate<br />Mobile: Tap once to enable sound, then press &amp; hold.</p>
+
+        <div class="mt-6 flex flex-wrap gap-5 md:gap-3 items-center justify-center md:items-start">
           <span class="pill">Plan structures!</span>
           <span class="pill">Tally resources!</span>
-          <span class="pill">Pickups &amp; mines!</span>
-          <span class="pill">Best‑yield routing!</span>
-	        <span class="pill">Community-built!</span>
-        </div>
-
-        <div class="mt-8 flex items-center gap-3">
-          <a class="btn" href="https://github.com/boswen/chiral-cartographer" target="_blank" rel="noopener">View on GitHub!</a>
-          <a class="btn" href="mailto:help@chiralcartographer.com?subject=Keep%20me%20posted!">Get updates!</a>
-        </div>
+          <span class="pill">Preppers &amp; mines!</span>
+          <!-- <span class="pill">Best‑yield routing!</span> -->
+	        <!-- <span class="pill">Community-built!</span> -->
+        </div>        
       </div>
 
       <div class="card">
         <h2 class="text-xl font-semibold mb-3">A Porter’s companion for Death Stranding 2!</h2>
-	<div class="mb-2 font-bold uppercase tracking-wide text-yellow-400">Planned Features:</div>
+        <div class="mb-2 font-bold uppercase tracking-wide text-yellow-400">Current Features:</div>
         <ul class="space-y-2 text-neutral-300">
-          <li>• Add road segments, monorail lines, and other structures, then track remaining resources.</li>
-          <li>• Mark unlocked preppers/outposts and mines, including upgrade levels and yields.</li>
-          <li>• Generate a master shopping list and efficient pickup plans.</li>
-          <li>• Prioritize finite outpost stock, then allocate to best‑yield mines by crystal rate.</li>
+          <li>• Add road segments, monorail lines, and other structures, then track required resources</li>
+          <li>• Mark unlocked preppers/outposts; track connection levels and available materials</li>
+          <li>• Track restored mines with yield upgrades</li>
+          <li>• Generate a master shopping list for required materials</li>
+          <li>• ... And more!</li>
         </ul>
-        <p class="mt-4 text-neutral-400 text-sm">Fan project. Not affiliated with Kojima Productions or Sony Interactive Entertainment.</p>
+        <p class="mt-4 text-neutral-400 text-sm">Fan project. Not affiliated with Kojima Productions, Sony Interactive Entertainment, or Playstation.</p>
       </div>
     </section>
 
     <section class="mt-12 card">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex flex-col items-center md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div class="text-sm uppercase tracking-wide opacity-70">Status</div>
-          <div class="text-lg font-medium">Phase: Teaser</div>
-          <p class="text-neutral-300 mt-1">Public alpha coming after core structure &amp; location features are finished.</p>
+          <div class="text-lg font-medium">Phase: Alpha</div>
+          <p><span class="text-neutral-300 mt-1">Public alpha is up! Check it out here: </span><a class="text-blue-500" href="/app/">The Chiral Cartographer!</a></p>
+          <div class="mt-8 flex items-center justify-center md:justify-start gap-5 md:gap-3">
+            <a class="btn" href="https://github.com/boswen/chiral-cartographer" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="mailto:help@chiralcartographer.com?subject=Keep%20me%20posted!">Get updates!</a>
+            <a class="btn" href="/faq.html">FAQ</a>
+          </div>
         </div>
-        <img src="res/logo.png" alt="The Chiral Cartographer Logo" class="inline-block object-contain ml-2" onerror="this.style.display='none';" style="width:256px; height:256px;">
+        <div class="items-center justify-center md:items-start">
+          <img src="res/logo.png" alt="The Chiral Cartographer Logo" class="inline-block object-contain ml-2" onerror="this.style.display='none';" style="width:256px; height:256px;">
+        </div>
       </div>
     </section>
 
@@ -94,9 +157,5 @@
       © <span id="year"></span> The Chiral Cartographer — Stick, Rope, Rail, &amp; Road
     </footer>
   </main>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
