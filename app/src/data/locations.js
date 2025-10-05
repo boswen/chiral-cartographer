@@ -67,6 +67,28 @@ export const Preppers = [
     }
   },
   {
+    id: 'the-bokka',
+    name: 'The Bokka',
+    type: 'Prepper',
+    region: 'Mexico',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 100,
+      ceramics: 120,
+      resins: 80,
+      chemicals: 60,
+      specialAlloys: 30,
+      chiralCrystals: 200
+    }
+  },
+  {
     id: 'c1-south-distribution',
     name: 'C1 South Distribution Center',
     type: 'Facility',
@@ -99,6 +121,28 @@ export const Preppers = [
     }
   },
   {
+    id: 'the-artist',
+    name: 'The Artist',
+    type: 'Prepper',
+    region: 'Mexico',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 90,
+      ceramics: 110,
+      resins: 70,
+      chemicals: 50,
+      specialAlloys: 25,
+      chiralCrystals: 180
+    }
+  },
+  {
     id: 'former-geophysics-lab',
     name: 'Former Geophysics Research Lab',
     type: 'Facility',
@@ -128,50 +172,6 @@ export const Preppers = [
       chemicals: 90,
       specialAlloys: 70,
       chiralCrystals: 320
-    }
-  },
-  {
-    id: 'the-bokka',
-    name: 'The Bokka',
-    type: 'Prepper',
-    region: 'Mexico',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 100,
-      ceramics: 120,
-      resins: 80,
-      chemicals: 60,
-      specialAlloys: 30,
-      chiralCrystals: 200
-    }
-  },
-  {
-    id: 'the-artist',
-    name: 'The Artist',
-    type: 'Prepper',
-    region: 'Mexico',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 90,
-      ceramics: 110,
-      resins: 70,
-      chemicals: 50,
-      specialAlloys: 25,
-      chiralCrystals: 180
     }
   },
 
@@ -243,6 +243,28 @@ export const Preppers = [
     }
   },
   {
+    id: 'the-musician',
+    name: 'The Musician',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 100,
+      ceramics: 75,
+      resins: 50,
+      chemicals: 25,
+      specialAlloys: 20,
+      chiralCrystals: 75
+    }
+  },
+  {
     id: 'west-fort-knot-f1',
     name: 'West Fort Knot (F1)',
     type: 'Facility',
@@ -309,8 +331,8 @@ export const Preppers = [
     }
   },
   {
-    id: 'the-musician',
-    name: 'The Musician',
+    id: 'animal-shelter',
+    name: 'Animal Shelter',
     type: 'Prepper',
     region: 'Australia',
     unlockRequirement: 'TBD',
@@ -322,12 +344,12 @@ export const Preppers = [
       5: { rewards: ['TBD'] }
     },
     defaultMaterials: {
-      metals: 100,
-      ceramics: 75,
-      resins: 50,
-      chemicals: 25,
-      specialAlloys: 20,
-      chiralCrystals: 75
+      metals: 150,
+      ceramics: 100,
+      resins: 125,
+      chemicals: 75,
+      specialAlloys: 25,
+      chiralCrystals: 125
     }
   },
   {
@@ -350,28 +372,6 @@ export const Preppers = [
       chemicals: 100,
       specialAlloys: 50,
       chiralCrystals: 100
-    }
-  },
-  {
-    id: 'animal-shelter',
-    name: 'Animal Shelter',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 150,
-      ceramics: 100,
-      resins: 125,
-      chemicals: 75,
-      specialAlloys: 25,
-      chiralCrystals: 125
     }
   },
   {
@@ -460,50 +460,6 @@ export const Preppers = [
       chemicals: 50,
       specialAlloys: 75,
       chiralCrystals: 125
-    }
-  },
-  {
-    id: 'the-metagenomicist',
-    name: 'The Metagenomicist',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 100,
-      ceramics: 75,
-      resins: 50,
-      chemicals: 150,
-      specialAlloys: 25,
-      chiralCrystals: 100
-    }
-  },
-  {
-    id: 'the-fisherman',
-    name: 'The Fisherman',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 75,
-      ceramics: 50,
-      resins: 100,
-      chemicals: 25,
-      specialAlloys: 15,
-      chiralCrystals: 50
     }
   },
   {
@@ -639,9 +595,9 @@ export const Preppers = [
     }
   },
   {
-    id: 'the-ghost-hunter',
-    name: 'The Ghost Hunter',
-    type: 'Prepper',
+    id: 'east-fort-knot-f4',
+    name: 'East Fort Knot (F4)',
+    type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
     connectionLevels: {
@@ -652,12 +608,12 @@ export const Preppers = [
       5: { rewards: ['TBD'] }
     },
     defaultMaterials: {
-      metals: 75,
-      ceramics: 50,
-      resins: 25,
-      chemicals: 100,
-      specialAlloys: 25,
-      chiralCrystals: 75
+      metals: 350,
+      ceramics: 250,
+      resins: 175,
+      chemicals: 125,
+      specialAlloys: 75,
+      chiralCrystals: 250
     }
   },
   {
@@ -683,8 +639,185 @@ export const Preppers = [
     }
   },
   {
-    id: 'east-fort-knot-f4',
-    name: 'East Fort Knot (F4)',
+    id: 'the-ghost-hunter',
+    name: 'The Ghost Hunter',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 75,
+      ceramics: 50,
+      resins: 25,
+      chemicals: 100,
+      specialAlloys: 25,
+      chiralCrystals: 75
+    }
+  },
+  {
+    id: 'the-metagenomicist',
+    name: 'The Metagenomicist',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 100,
+      ceramics: 75,
+      resins: 50,
+      chemicals: 150,
+      specialAlloys: 25,
+      chiralCrystals: 100
+    }
+  },
+  
+  {
+    id: 'f5-east-distribution-centre',
+    name: 'F5 East Distribution Centre',
+    type: 'Facility',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 300,
+      ceramics: 200,
+      resins: 150,
+      chemicals: 100,
+      specialAlloys: 75,
+      chiralCrystals: 200
+    }
+  },
+  {
+    id: 'the-fisherman',
+    name: 'The Fisherman',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 75,
+      ceramics: 50,
+      resins: 100,
+      chemicals: 25,
+      specialAlloys: 15,
+      chiralCrystals: 50
+    }
+  },
+  {
+    id: 'the-adventurer',
+    name: 'The Adventurer',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 125,
+      ceramics: 100,
+      resins: 150,
+      chemicals: 75,
+      specialAlloys: 25,
+      chiralCrystals: 100
+    }
+  },
+  {
+    id: 'eastern-environmental-observatory',
+    name: 'Eastern Environmental Observatory',
+    type: 'Facility',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 200,
+      ceramics: 150,
+      resins: 100,
+      chemicals: 200,
+      specialAlloys: 50,
+      chiralCrystals: 150
+    }
+  },
+  {
+    id: 'the-aeronautical-engineer',
+    name: 'The Aeronautical Engineer',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 175,
+      ceramics: 125,
+      resins: 100,
+      chemicals: 75,
+      specialAlloys: 150,
+      chiralCrystals: 125
+    }
+  },
+  {
+    id: 'the-phantom-smith',
+    name: 'The Phantom Smith',
+    type: 'Prepper',
+    region: 'Australia',
+    unlockRequirement: 'TBD',
+    connectionLevels: {
+      1: { rewards: ['Chiral Network Established'] },
+      2: { rewards: ['TBD'] },
+      3: { rewards: ['TBD'] },
+      4: { rewards: ['TBD'] },
+      5: { rewards: ['TBD'] }
+    },
+    defaultMaterials: {
+      metals: 150,
+      ceramics: 100,
+      resins: 75,
+      chemicals: 50,
+      specialAlloys: 125,
+      chiralCrystals: 100
+    }
+  },
+  {
+    id: 'south-fort-knot-f6',
+    name: 'South Fort Knot (F6)',
     type: 'Facility',
     region: 'Australia',
     unlockRequirement: 'TBD',
@@ -724,28 +857,6 @@ export const Preppers = [
       chemicals: 125,
       specialAlloys: 25,
       chiralCrystals: 75
-    }
-  },
-  {
-    id: 'south-fort-knot-f6',
-    name: 'South Fort Knot (F6)',
-    type: 'Facility',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 350,
-      ceramics: 250,
-      resins: 175,
-      chemicals: 125,
-      specialAlloys: 75,
-      chiralCrystals: 250
     }
   },
   {
@@ -815,94 +926,6 @@ export const Preppers = [
     }
   },
   {
-    id: 'the-phantom-smith',
-    name: 'The Phantom Smith',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 150,
-      ceramics: 100,
-      resins: 75,
-      chemicals: 50,
-      specialAlloys: 125,
-      chiralCrystals: 100
-    }
-  },
-  {
-    id: 'eastern-environmental-observatory',
-    name: 'Eastern Environmental Observatory',
-    type: 'Facility',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 200,
-      ceramics: 150,
-      resins: 100,
-      chemicals: 200,
-      specialAlloys: 50,
-      chiralCrystals: 150
-    }
-  },
-  {
-    id: 'the-aeronautical-engineer',
-    name: 'The Aeronautical Engineer',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 175,
-      ceramics: 125,
-      resins: 100,
-      chemicals: 75,
-      specialAlloys: 150,
-      chiralCrystals: 125
-    }
-  },
-  {
-    id: 'f5-east-distribution-centre',
-    name: 'F5 East Distribution Centre',
-    type: 'Facility',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 300,
-      ceramics: 200,
-      resins: 150,
-      chemicals: 100,
-      specialAlloys: 75,
-      chiralCrystals: 200
-    }
-  },
-  {
     id: 'mr-impossible',
     name: 'Mr. Impossible',
     type: 'Prepper',
@@ -921,28 +944,6 @@ export const Preppers = [
       resins: 125,
       chemicals: 100,
       specialAlloys: 50,
-      chiralCrystals: 100
-    }
-  },
-  {
-    id: 'the-adventurer',
-    name: 'The Adventurer',
-    type: 'Prepper',
-    region: 'Australia',
-    unlockRequirement: 'TBD',
-    connectionLevels: {
-      1: { rewards: ['Chiral Network Established'] },
-      2: { rewards: ['TBD'] },
-      3: { rewards: ['TBD'] },
-      4: { rewards: ['TBD'] },
-      5: { rewards: ['TBD'] }
-    },
-    defaultMaterials: {
-      metals: 125,
-      ceramics: 100,
-      resins: 150,
-      chemicals: 75,
-      specialAlloys: 25,
       chiralCrystals: 100
     }
   },
@@ -975,7 +976,7 @@ export const mines = [
     id: 'smoke-hill-mine',
     name: 'Smoke Hill Mine',
     type: 'mine',
-    region: 'Mexico',
+    region: 'Australia',
     materialType: 'ceramics',
     unlockRequirement: 'Sub Order 104: Restore Smoke Hill Mine',
     chiralCrystalsRequired: 800,
