@@ -521,6 +521,7 @@ function App() {
                       />
                     </div>
 
+                    {/* How to display locations that are both unlocked and active */}
                     {location.unlocked && location.active && (
                       <div className="space-y-2">
                         <Label className="text-sm font-medium">Available Materials:</Label>
@@ -534,6 +535,27 @@ function App() {
                                 onChange={(e) => updateLocationMaterial(location.id, material, parseInt(e.target.value) || 0)}
                                 className="material-input-field"
                                 min="0"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* How to display locations that are only unlocked, but NOT active */}
+                    {location.unlocked && !location.active && (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium text-gray-500">Available Materials (Inactive):</Label>
+                        <div className="material-input-grid">
+                          {Object.entries(location.availableMaterials || {}).map(([material, amount]) => (
+                            <div key={material} className="material-input-row">
+                              <Label className="material-input-label text-gray-500">{formatMaterialName(material)}:</Label>
+                              <Input
+                                type="number"
+                                value={amount}
+                                className="material-input-field text-gray-500"
+                                min="0"
+                                disabled
                               />
                             </div>
                           ))}
